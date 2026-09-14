@@ -1,3 +1,4 @@
+import CurrentProjects from "./CurrentProjects";
 import FeaturedGame from "./FeaturedGame";
 import Hero from "./Hero";
 import QuickTools from "./QuickTools";
@@ -12,6 +13,7 @@ function HomePage() {
         <div className="home-page__content">
           <QuickTools />
           <FeaturedGame />
+          <CurrentProjects />
         </div>
       </div>
 

@@ -897,6 +897,10 @@ body,
   .coming-soon {
     max-width: 30rem;
   }
+
+  .profile-inner {
+  width: min(calc(100% - 4rem), var(--content-width));
+}
 }
 
 /* Tablet and smaller desktop */
@@ -1049,6 +1053,133 @@ body,
 
   .tool-card {
     min-height: 8rem;
+  }
+}
+
+/* =========================================================
+   PROFILE / FOOTER
+   ========================================================= */
+
+.profile-section {
+  width: 100%;
+  margin-top: 3rem;
+  background: var(--color-page-deep);
+  color: var(--color-surface);
+}
+
+.profile-inner {
+  width: min(calc(100% - 2rem), var(--content-width));
+  margin-inline: auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+
+  padding-block: 1.7rem;
+}
+
+
+/* ---------- LEFT SIDE ---------- */
+
+.profile-left {
+  min-width: 0;
+}
+
+.profile-name {
+  margin: 0;
+
+  color: var(--color-surface);
+
+  font-family: inherit;
+  font-size: 1.45rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.profile-stack {
+  margin: 0.65rem 0 0;
+  color: rgba(248, 245, 239, 0.52);
+  font-size: 0.68rem;
+  letter-spacing: 0.015em;
+  line-height: 1.5;
+}
+
+
+/* ---------- LINKS ---------- */
+
+.profile-links {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  flex-shrink: 0;
+  margin-right: clamp(2rem, 6vw, 6rem);
+}
+
+.profile-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  color: rgba(248, 245, 239, 0.76);
+
+  font-size: 0.88rem;
+  font-weight: 600;
+
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.profile-links a svg {
+  width: 1.15rem;
+  height: 1.15rem;
+
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.profile-links a:hover {
+  color: var(--color-gold);
+  transform: translateY(-2px);
+}
+
+.profile-links a:hover svg {
+  color: var(--color-gold);
+  transform: scale(1.08);
+}
+
+
+/* ---------- LARGER SCREENS ---------- */
+
+@media (min-width: 48rem) {
+  .profile-inner {
+    width: min(calc(100% - 4rem), var(--content-width));
+  }
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 40rem) {
+  .profile-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    padding-block: 1.6rem;
+  }
+
+  .profile-links {
+    width: 100%;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .profile-stack {
+    max-width: 28rem;
   }
 }
 

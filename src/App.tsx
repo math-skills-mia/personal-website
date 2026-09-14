@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import SiteLayout from "./core/layouts/SiteLayout";
-import AboutPage from "./core/pages/AboutPage";
 import GamesPage from "./core/pages/GamesPage";
 import HomePage from "./core/pages/HomePage/HomePage";
 import HangmanPage from "./games/hangman/pages/HangmanPage";
@@ -16,8 +15,6 @@ function App() {
       <Routes>
         <Route element={<SiteLayout />}>
           <Route index element={<HomePage />} />
-
-          <Route path="about" element={<AboutPage />} />
 
           <Route path="games">
             <Route index element={<GamesPage />} />

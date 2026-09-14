@@ -1046,6 +1046,15 @@ body,
   }
 }
 
+button.navbar__link {
+  cursor: pointer;
+}
+
+.navbar__drawer-links button.navbar__drawer-link {
+  width: 100%;
+  text-align: left;
+}
+
 @media (max-width: 22rem) {
   .quick-tools__grid {
     grid-template-columns: 1fr;

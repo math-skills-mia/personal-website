@@ -17,10 +17,6 @@ const navigationItems = [
     label: "Games",
     path: ROUTES.games,
   },
-  {
-    label: "About",
-    path: ROUTES.about,
-  },
 ];
 
 function Navbar() {
@@ -28,6 +24,21 @@ function Navbar() {
 
   function closeMenu() {
     setIsMenuOpen(false);
+  }
+
+  function scrollToProjects() {
+    closeMenu();
+
+    if (window.location.pathname === ROUTES.home) {
+      document.getElementById("projects")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+      return;
+    }
+
+    window.location.href = `${ROUTES.home}#projects`;
   }
 
   useEffect(() => {
@@ -79,6 +90,14 @@ function Navbar() {
                 {item.label}
               </NavLink>
             ))}
+
+            <button
+              className="navbar__link"
+              type="button"
+              onClick={scrollToProjects}
+            >
+              Projects
+            </button>
           </div>
 
           <button
@@ -168,6 +187,15 @@ function Navbar() {
               <span aria-hidden="true">→</span>
             </NavLink>
           ))}
+
+          <button
+            className="navbar__drawer-link"
+            type="button"
+            onClick={scrollToProjects}
+          >
+            <span>Projects</span>
+            <span aria-hidden="true">→</span>
+          </button>
         </div>
 
         <div className="navbar__drawer-footer">

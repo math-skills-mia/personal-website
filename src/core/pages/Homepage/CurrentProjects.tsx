@@ -40,7 +40,7 @@ function CurrentProjects() {
   };
 
   return (
-    <section className="current-projects">
+    <section className="current-projects" id="projects">
       <div className="current-projects__header">
         <p className="section-label">Selected Work</p>
         <h2 className="current-projects__title">Current Projects</h2>

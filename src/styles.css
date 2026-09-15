@@ -43,6 +43,7 @@
   --radius-large: 1.5rem;
 
   --content-width: 80rem;
+  --content-width-wide: 108rem;
 }
 
 [data-theme="dark"] {
@@ -173,7 +174,12 @@ body,
   width: 100%;
 }
 
-.home-page,
+.home-page {
+  width: min(calc(100% - 2rem), var(--content-width-wide));
+  margin-inline: auto;
+  padding-block: 1rem 4rem;
+}
+
 .page-container {
   width: min(calc(100% - 2rem), var(--content-width));
   margin-inline: auto;
@@ -231,34 +237,33 @@ body,
 /* Hero layout */
 
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 2.15fr) minmax(13rem, 0.85fr);
-  gap: 0.9rem;
-}
-
-.hero__main {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(22rem, 0.95fr);
   min-height: 23.5rem;
   overflow: hidden;
-  padding: clamp(2rem, 5vw, 4.75rem);
 }
 
 .hero__content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+
   display: flex;
+  max-width: 48rem;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
-  max-width: 48rem;
+
+  padding: clamp(2rem, 5vw, 4.75rem);
 }
 
 .hero__title {
   max-width: 10ch;
   margin: 1rem 0 0;
+
   color: var(--color-text-strong);
-  font-size: clamp(3.25rem, 9vw, 8rem);
+
+  font-size: clamp(3.25rem, 7vw, 8rem);
   font-weight: 500;
   letter-spacing: -0.075em;
   line-height: 0.88;
@@ -266,7 +271,9 @@ body,
 
 .hero__name {
   margin: 1.5rem 0 0;
+
   color: var(--color-text);
+
   font-size: clamp(1rem, 2vw, 1.35rem);
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -277,8 +284,11 @@ body,
   flex-wrap: wrap;
   align-items: center;
   gap: 0.55rem;
+
   margin-top: 1.25rem;
+
   color: var(--color-text-muted);
+
   font-size: 0.75rem;
   font-weight: 650;
   letter-spacing: 0.09em;
@@ -290,13 +300,35 @@ body,
   font-weight: 700;
 }
 
-.hero__pattern-card {
+.hero__pattern {
   position: relative;
-  display: grid;
-  min-height: 23.5rem;
-  overflow: hidden;
-  padding: clamp(1.25rem, 3vw, 2.25rem);
-  background: var(--color-surface-muted);
+  z-index: 1;
+
+  min-width: 0;
+  padding: clamp(1.5rem, 3vw, 3rem) clamp(1.5rem, 4vw, 4rem)
+    clamp(1.5rem, 3vw, 3rem) 0;
+
+  /*
+   * The pattern belongs to the hero rather than sitting in its own panel.
+   * This mask gradually hides the pluses as they approach the text.
+   */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.08) 9%,
+    rgba(0, 0, 0, 0.4) 24%,
+    black 48%,
+    black 100%
+  );
+
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.08) 9%,
+    rgba(0, 0, 0, 0.4) 24%,
+    black 48%,
+    black 100%
+  );
 }
 
 /* Plus grid */
@@ -883,8 +915,11 @@ body,
 /* Larger screens */
 
 @media (min-width: 48rem) {
+  .home-page {
+    width: min(calc(100% - 4rem), var(--content-width-wide));
+  }
+
   .navbar,
-  .home-page,
   .page-container {
     width: min(calc(100% - 4rem), var(--content-width));
   }
@@ -928,16 +963,17 @@ body,
 }
 
   .hero {
-    display: block;
-  }
+  display: block;
+  min-height: 21.5rem;
+}
 
-  .hero__main {
-    min-height: 21.5rem;
-  }
+.hero__content {
+  min-height: 21.5rem;
+}
 
-  .hero__pattern-card {
-    display: none;
-  }
+.hero__pattern {
+  display: none;
+}
 
   .quick-tools__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -972,10 +1008,14 @@ body,
     margin-top: 1rem;
   }
 
-  .hero__main {
-    min-height: 19rem;
-    padding: 1.5rem;
-  }
+  .hero {
+  min-height: 19rem;
+}
+
+.hero__content {
+  min-height: 19rem;
+  padding: 1.5rem;
+}
 
   .section-label {
     font-size: 0.68rem;

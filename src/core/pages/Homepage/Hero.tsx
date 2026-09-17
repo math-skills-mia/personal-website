@@ -18,8 +18,6 @@ function Hero() {
           <span>Code</span>
           <span aria-hidden="true">/</span>
           <span>Games</span>
-          <span aria-hidden="true">/</span>
-          <span>Experiments</span>
         </div>
       </div>
 

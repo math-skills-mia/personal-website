@@ -211,6 +211,13 @@ body,
   text-transform: uppercase;
 }
 
+/* Section labels that sit directly on the green page background */
+.quick-tools .section-label,
+.featured-game .section-label,
+.current-projects .section-label {
+  color: rgba(248, 245, 239, 0.55);
+}
+
 .interactive-element {
   transition:
     transform 180ms ease,
@@ -406,7 +413,7 @@ body,
 /* Quick tools */
 
 .quick-tools {
-  padding: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(1.5rem, 2.5vw, 2.5rem) 0 0;
 }
 
 .quick-tools__header {
@@ -419,7 +426,7 @@ body,
 
 .quick-tools__title {
   margin: 0.35rem 0 0;
-  color: var(--color-text-strong);
+  color: var(--color-surface);
   font-size: clamp(1.35rem, 3vw, 1.8rem);
   font-weight: 600;
   letter-spacing: -0.035em;
@@ -431,7 +438,7 @@ body,
   align-items: center;
   gap: 0.45rem;
   flex-shrink: 0;
-  color: var(--color-text-muted);
+  color: rgba(248, 245, 239, 0.62);
   font-size: 0.85rem;
   font-weight: 600;
   transition:
@@ -440,7 +447,7 @@ body,
 }
 
 .quick-tools__view-all:hover {
-  color: var(--color-accent-hover);
+  color: var(--color-gold);
   transform: translateX(2px);
 }
 
@@ -460,7 +467,7 @@ body,
   display: grid;
   grid-template-rows: auto 1fr;
   min-width: 0;
-  min-height: 10.5rem;
+  min-height: 12rem;
   padding: 1.1rem;
   overflow: hidden;
   border: 1px solid var(--color-border);
@@ -476,8 +483,8 @@ body,
 
 .tool-card__icon {
   display: grid;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
   place-items: center;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-small);
@@ -486,8 +493,8 @@ body,
 }
 
 .tool-card__icon-svg {
-  width: 1.45rem;
-  height: 1.45rem;
+  width: 1.75rem;
+  height: 1.75rem;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.6;
@@ -515,22 +522,6 @@ body,
   color: var(--color-text-muted);
   font-size: 0.78rem;
   line-height: 1.4;
-}
-
-.tool-card__arrow {
-  position: absolute;
-  top: 1.1rem;
-  right: 1.1rem;
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
-  transition:
-    color 180ms ease,
-    transform 180ms ease;
-}
-
-.tool-card:hover .tool-card__arrow {
-  color: var(--color-accent-hover);
-  transform: translate(2px, -2px);
 }
 
 /* Tool color treatments */
@@ -962,19 +953,6 @@ body,
   cursor: pointer;
 }
 
-  .hero {
-  display: block;
-  min-height: 21.5rem;
-}
-
-.hero__content {
-  min-height: 21.5rem;
-}
-
-.hero__pattern {
-  display: none;
-}
-
   .quick-tools__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1038,10 +1016,6 @@ body,
     gap: 0.4rem;
     margin-top: 1rem;
     font-size: 0.68rem;
-  }
-
-  .quick-tools {
-    padding: 1rem;
   }
 
   .quick-tools__header {
@@ -1114,23 +1088,41 @@ button.navbar__link {
   grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
   gap: clamp(2rem, 5vw, 4rem);
   align-items: stretch;
-
   margin-top: 3.25rem;
 }
 
 
 /* ---------- VISUAL ---------- */
 
-.featured-game__visual {
-  min-height: 21rem;
-  overflow: hidden;
-
+.featured-game__visual-link {
+  display: block;
+  min-width: 0;
   border-radius: var(--radius-large);
+  text-decoration: none;
+}
+
+.featured-game__visual-link:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+.featured-game__visual {
+  min-height: 23rem;
+  overflow: hidden;
   border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
 
   transition:
-    background-color 250ms ease,
-    border-color 250ms ease;
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms ease,
+    border-color 260ms ease,
+    background-color 260ms ease;
+}
+
+a.featured-game__visual-link:hover .featured-game__visual {
+  border-color: rgba(142, 112, 40, 0.42);
+  box-shadow: var(--shadow-subtle);
+  transform: translateY(-3px);
 }
 
 .featured-game__visual--gold {
@@ -1147,30 +1139,70 @@ button.navbar__link {
 
 .featured-game__visual-inner {
   display: flex;
-  min-height: 21rem;
+  min-height: 23rem;
   flex-direction: column;
-  justify-content: space-between;
-
-  padding: clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .featured-game__visual-label {
   color: var(--color-text-muted);
-
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.featured-game__mockup {
+
+/* ---------- HANGMAN PREVIEW ---------- */
+
+.featured-game__hangman {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  padding-top: 0.5rem;
 }
 
-.featured-game__mockup-word {
+.featured-game__hangman-drawing {
+  width: clamp(11rem, 20vw, 15rem);
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+a.featured-game__visual-link:hover .featured-game__hangman-drawing {
+  transform: scale(1.05);
+}
+
+a.featured-game__visual-link:hover .hangman-drawing__arm--right {
+  animation: hangman-wave 850ms ease-in-out;
+  transform-box: fill-box;
+}
+
+@keyframes hangman-wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-70deg);
+  }
+
+  45% {
+    transform: rotate(-50deg);
+  }
+
+  65% {
+    transform: rotate(-75deg);
+  }
+
+  80% {
+    transform: rotate(-55deg);
+  }
+}
+
+.featured-game__word {
   color: var(--color-text-strong);
 
   font-family:
@@ -1181,16 +1213,61 @@ button.navbar__link {
     Consolas,
     monospace;
 
-  font-size: clamp(2rem, 5vw, 4.5rem);
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: clamp(1.25rem, 2.4vw, 2rem);
+  font-weight: 650;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+
+  transition:
+    color 220ms ease,
+    letter-spacing 260ms ease;
 }
 
-.featured-game__mockup-note {
+a.featured-game__visual-link:hover .featured-game__word {
+  letter-spacing: 0.31em;
+}
+
+.featured-game__coming-soon {
+  display: grid;
+  flex: 1;
+  place-items: center;
   color: var(--color-text-muted);
-  font-size: 0.75rem;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
 }
 
+
+/* ---------- HANGMAN DRAWING ---------- */
+
+.hangman-drawing {
+  --hangman-frame: var(--color-text-strong);
+  --hangman-person: var(--color-sage-strong);
+
+  display: block;
+  height: auto;
+  overflow: visible;
+}
+
+.hangman-drawing__gallows {
+  fill: none;
+  stroke: var(--hangman-frame);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hangman-drawing__person {
+  fill: none;
+  stroke: var(--hangman-person);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hangman-drawing__head {
+  fill: none;
+}
 
 /* ---------- CONTENT ---------- */
 
@@ -1199,29 +1276,16 @@ button.navbar__link {
   min-width: 0;
   flex-direction: column;
   justify-content: space-between;
-
   padding-block: 1rem;
 }
 
 .featured-game__title {
   margin: 0.7rem 0 0;
-
   color: var(--color-surface);
-
   font-size: clamp(2.4rem, 5vw, 4.5rem);
   font-weight: 500;
   letter-spacing: -0.055em;
   line-height: 0.95;
-}
-
-.featured-game__description {
-  max-width: 32rem;
-  margin: 1.25rem 0 0;
-
-  color: rgba(248, 245, 239, 0.68);
-
-  font-size: 0.95rem;
-  line-height: 1.65;
 }
 
 .featured-game__tech {
@@ -1231,10 +1295,6 @@ button.navbar__link {
 }
 
 .featured-game__tech span {
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-
   color: rgba(248, 245, 239, 0.52);
   font-size: 0.68rem;
 }
@@ -1246,49 +1306,14 @@ button.navbar__link {
 }
 
 
-/* ---------- BOTTOM ---------- */
-
-.featured-game__bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-
-  margin-top: 3rem;
-}
-
-.featured-game__play {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  color: var(--color-gold);
-
-  font-size: 0.85rem;
-  font-weight: 650;
-
-  transition:
-    color 180ms ease,
-    transform 180ms ease;
-}
-
-.featured-game__play svg {
-  width: 1rem;
-  height: 1rem;
-}
-
-.featured-game__play:hover {
-  color: var(--color-surface);
-  transform: translateY(-1px);
-}
+/* ---------- CONTROLS ---------- */
 
 .featured-game__controls {
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
   gap: 0.8rem;
-
   color: rgba(248, 245, 239, 0.5);
-
   font-size: 0.7rem;
 }
 
@@ -1297,12 +1322,9 @@ button.navbar__link {
   width: 2rem;
   height: 2rem;
   place-items: center;
-
   border: 1px solid rgba(248, 245, 239, 0.14);
   border-radius: 50%;
-
   color: rgba(248, 245, 239, 0.68);
-
   cursor: pointer;
 
   transition:
@@ -1315,6 +1337,11 @@ button.navbar__link {
   border-color: var(--color-gold);
   color: var(--color-gold);
   transform: translateY(-2px);
+}
+
+.featured-game__controls button:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 3px;
 }
 
 
@@ -1332,7 +1359,64 @@ button.navbar__link {
   }
 
   .featured-game__content {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 2rem;
     padding-block: 0;
+  }
+
+  .featured-game__controls {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 36rem) {
+  .featured-game {
+    margin-top: 2.5rem;
+  }
+
+  .featured-game__visual,
+  .featured-game__visual-inner {
+    min-height: 17rem;
+  }
+
+  .featured-game__visual-inner {
+    padding: 1.25rem;
+  }
+
+  .featured-game__hangman-drawing {
+    width: 11rem;
+  }
+
+  .featured-game__word {
+    font-size: 1.1rem;
+  }
+
+  .featured-game__title {
+    font-size: 2.5rem;
+  }
+
+  .featured-game__content {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+}
+
+/* Hero switches to text-only when the split layout becomes too narrow */
+
+@media (max-width: 44rem) {
+  .hero {
+    display: block;
+    min-height: 21.5rem;
+  }
+
+  .hero__content {
+    min-height: 21.5rem;
+  }
+
+  .hero__pattern {
+    display: none;
   }
 }
 

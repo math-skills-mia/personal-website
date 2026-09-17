@@ -1,33 +1,33 @@
 import { useState } from "react";
-import { FiArrowLeft, FiArrowRight, FiExternalLink } from "react-icons/fi";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../../constants/routes";
+import HangmanDrawing from "../../../games/hangman/components/HangmanDrawing";
 
 const featuredGames = [
   {
     title: "Hangman",
     category: "Word Game",
-    description:
-      "A clean take on the classic guessing game, built around simple interaction and responsive UI.",
     tech: ["React", "TypeScript"],
-    link: "/games/hangman",
+    link: ROUTES.hangman,
     accent: "gold",
+    available: true,
   },
   {
     title: "Game Two",
     category: "Coming Soon",
-    description:
-      "A placeholder for another featured game you can rotate into this space later.",
     tech: ["React"],
     link: "#",
     accent: "rose",
+    available: false,
   },
   {
     title: "Game Three",
     category: "Coming Soon",
-    description:
-      "Another future game slot, already wired into the featured carousel structure.",
     tech: ["TypeScript"],
     link: "#",
     accent: "sage",
+    available: false,
   },
 ];
 
@@ -48,32 +48,50 @@ function FeaturedGame() {
     );
   };
 
+  const visual = (
+    <div
+      className={`featured-game__visual featured-game__visual--${activeGame.accent}`}
+    >
+      <div className="featured-game__visual-inner">
+        <span className="featured-game__visual-label">
+          {activeGame.category}
+        </span>
+
+        {activeGame.title === "Hangman" ? (
+          <div className="featured-game__hangman">
+            <HangmanDrawing
+              numberOfIncorrectGuesses={6}
+              className="featured-game__hangman-drawing"
+            />
+
+            <span className="featured-game__word">HANGMAN</span>
+          </div>
+        ) : (
+          <div className="featured-game__coming-soon">Coming Soon</div>
+        )}
+      </div>
+    </div>
+  );
+
   return (
     <section className="featured-game">
-      <div
-        className={`featured-game__visual featured-game__visual--${activeGame.accent}`}
-      >
-        <div className="featured-game__visual-inner">
-          <span className="featured-game__visual-label">
-            {activeGame.category}
-          </span>
-
-          <div className="featured-game__mockup">
-            <span className="featured-game__mockup-word">_ A _ G _ A N</span>
-            <span className="featured-game__mockup-note">
-              Interactive preview coming later
-            </span>
-          </div>
-        </div>
-      </div>
+      {activeGame.available ? (
+        <Link
+          className="featured-game__visual-link"
+          to={activeGame.link}
+          aria-label={`Play ${activeGame.title}`}
+        >
+          {visual}
+        </Link>
+      ) : (
+        <div className="featured-game__visual-link">{visual}</div>
+      )}
 
       <div className="featured-game__content">
         <div>
           <p className="section-label">Featured Game</p>
 
           <h2 className="featured-game__title">{activeGame.title}</h2>
-
-          <p className="featured-game__description">{activeGame.description}</p>
 
           <div className="featured-game__tech">
             {activeGame.tech.map((item) => (
@@ -82,34 +100,27 @@ function FeaturedGame() {
           </div>
         </div>
 
-        <div className="featured-game__bottom">
-          <a className="featured-game__play" href={activeGame.link}>
-            Play game
-            <FiExternalLink aria-hidden="true" />
-          </a>
+        <div className="featured-game__controls">
+          <button
+            type="button"
+            onClick={showPrevious}
+            aria-label="Previous featured game"
+          >
+            <FiArrowLeft aria-hidden="true" />
+          </button>
 
-          <div className="featured-game__controls">
-            <button
-              type="button"
-              onClick={showPrevious}
-              aria-label="Previous featured game"
-            >
-              <FiArrowLeft />
-            </button>
+          <span>
+            {String(activeIndex + 1).padStart(2, "0")} /{" "}
+            {String(featuredGames.length).padStart(2, "0")}
+          </span>
 
-            <span>
-              {String(activeIndex + 1).padStart(2, "0")} /{" "}
-              {String(featuredGames.length).padStart(2, "0")}
-            </span>
-
-            <button
-              type="button"
-              onClick={showNext}
-              aria-label="Next featured game"
-            >
-              <FiArrowRight />
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={showNext}
+            aria-label="Next featured game"
+          >
+            <FiArrowRight aria-hidden="true" />
+          </button>
         </div>
       </div>
     </section>

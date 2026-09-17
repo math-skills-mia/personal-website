@@ -105,10 +105,7 @@ function ToolIcon({ name }: { name: ToolIconName }) {
 
 function QuickTools() {
   return (
-    <section
-      className="quick-tools surface-card"
-      aria-labelledby="quick-tools-title"
-    >
+    <section className="quick-tools" aria-labelledby="quick-tools-title">
       <div className="quick-tools__header">
         <div>
           <p className="section-label">Utilities</p>
@@ -144,10 +141,6 @@ function QuickTools() {
             <span className="tool-card__content">
               <span className="tool-card__title">{tool.title}</span>
               <span className="tool-card__description">{tool.description}</span>
-            </span>
-
-            <span className="tool-card__arrow" aria-hidden="true">
-              ↗
             </span>
           </Link>
         ))}

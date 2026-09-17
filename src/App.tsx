@@ -11,7 +11,7 @@ import "./styles.css";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/personal-website">
       <Routes>
         <Route element={<SiteLayout />}>
           <Route index element={<HomePage />} />

@@ -31,6 +31,51 @@ const featuredGames = [
   },
 ];
 
+function GameVisual({
+  game,
+  isActive,
+}: {
+  game: (typeof featuredGames)[number];
+  isActive: boolean;
+}) {
+  const visual = (
+    <div
+      className={`featured-game__visual featured-game__visual--${game.accent} ${
+        isActive ? "featured-game__visual--active" : ""
+      }`}
+    >
+      <div className="featured-game__visual-inner">
+        <span className="featured-game__visual-label">{game.category}</span>
+
+        {game.title === "Hangman" ? (
+          <div className="featured-game__hangman">
+            <HangmanDrawing
+              numberOfIncorrectGuesses={6}
+              className="featured-game__hangman-drawing"
+            />
+
+            <span className="featured-game__word">HANGMAN</span>
+          </div>
+        ) : (
+          <div className="featured-game__coming-soon">Coming Soon</div>
+        )}
+      </div>
+    </div>
+  );
+
+  return game.available ? (
+    <Link
+      className="featured-game__visual-link"
+      to={game.link}
+      aria-label={`Play ${game.title}`}
+    >
+      {visual}
+    </Link>
+  ) : (
+    <div className="featured-game__visual-link">{visual}</div>
+  );
+}
+
 function FeaturedGame() {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -48,44 +93,24 @@ function FeaturedGame() {
     );
   };
 
-  const visual = (
-    <div
-      className={`featured-game__visual featured-game__visual--${activeGame.accent}`}
-    >
-      <div className="featured-game__visual-inner">
-        <span className="featured-game__visual-label">
-          {activeGame.category}
-        </span>
-
-        {activeGame.title === "Hangman" ? (
-          <div className="featured-game__hangman">
-            <HangmanDrawing
-              numberOfIncorrectGuesses={6}
-              className="featured-game__hangman-drawing"
-            />
-
-            <span className="featured-game__word">HANGMAN</span>
-          </div>
-        ) : (
-          <div className="featured-game__coming-soon">Coming Soon</div>
-        )}
-      </div>
-    </div>
-  );
-
   return (
     <section className="featured-game">
-      {activeGame.available ? (
-        <Link
-          className="featured-game__visual-link"
-          to={activeGame.link}
-          aria-label={`Play ${activeGame.title}`}
+      <div className="featured-game__viewport">
+        <div
+          className="featured-game__track"
+          style={{
+            transform: `translateX(calc(${activeIndex} * (-92% - 1rem)))`,
+          }}
         >
-          {visual}
-        </Link>
-      ) : (
-        <div className="featured-game__visual-link">{visual}</div>
-      )}
+          {featuredGames.map((game, index) => (
+            <GameVisual
+              key={game.title}
+              game={game}
+              isActive={index === activeIndex}
+            />
+          ))}
+        </div>
+      </div>
 
       <div className="featured-game__content">
         <div>

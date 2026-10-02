@@ -1091,6 +1091,21 @@ button.navbar__link {
   margin-top: 3.25rem;
 }
 
+.featured-game__viewport {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.featured-game__track {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.featured-game__track > .featured-game__visual-link {
+  flex: 0 0 92%;
+}
 
 /* ---------- VISUAL ---------- */
 
@@ -1150,6 +1165,23 @@ a.featured-game__visual-link:hover .featured-game__visual {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.featured-game__visual-label,
+.featured-game__coming-soon,
+.featured-game__hangman {
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.featured-game__visual:not(.featured-game__visual--active)
+  .featured-game__visual-label,
+.featured-game__visual:not(.featured-game__visual--active)
+  .featured-game__coming-soon,
+.featured-game__visual:not(.featured-game__visual--active)
+  .featured-game__hangman {
+  opacity: 0;
 }
 
 

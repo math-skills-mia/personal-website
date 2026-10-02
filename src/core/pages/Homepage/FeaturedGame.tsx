@@ -99,7 +99,11 @@ function FeaturedGame() {
         <div
           className="featured-game__track"
           style={{
-            transform: `translateX(calc(${activeIndex} * (-92% - 1rem)))`,
+            transform: `translateX(
+              calc(
+                5% - ${activeIndex} * (90% + var(--card-gap))
+              )
+            )`,
           }}
         >
           {featuredGames.map((game, index) => (
@@ -113,10 +117,16 @@ function FeaturedGame() {
       </div>
 
       <div className="featured-game__content">
-        <div>
+        <div className="featured-game__info">
           <p className="section-label">Featured Game</p>
 
-          <h2 className="featured-game__title">{activeGame.title}</h2>
+          {activeGame.available ? (
+            <Link className="featured-game__title-link" to={activeGame.link}>
+              <h2 className="featured-game__title">{activeGame.title}</h2>
+            </Link>
+          ) : (
+            <h2 className="featured-game__title">{activeGame.title}</h2>
+          )}
 
           <div className="featured-game__tech">
             {activeGame.tech.map((item) => (
